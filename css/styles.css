@@ -1,0 +1,828 @@
+/* =====================================================
+   Estilos personalizados - Agenda de Contactos
+   Diseño premium con glassmorphism y gradientes modernos
+   ===================================================== */
+
+/* === Variables CSS === */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --dark-bg: #0f0f1a;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-bg-light: rgba(255, 255, 255, 0.95);
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-primary: #e8e8f0;
+    --text-secondary: #a0a0b8;
+    --shadow-glow: 0 8px 32px rgba(102, 126, 234, 0.25);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === Reset y Base === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Fondo animado con gradiente */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(79, 172, 254, 0.08) 0%, transparent 50%);
+    z-index: -1;
+    animation: bgPulse 15s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* === Navbar === */
+.bg-nav-custom {
+    background: rgba(15, 15, 26, 0.85) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.navbar-brand {
+    font-weight: 700 !important;
+    letter-spacing: -0.5px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.25rem !important;
+}
+
+.navbar-brand i {
+    -webkit-text-fill-color: #667eea;
+}
+
+.nav-link {
+    font-weight: 500;
+    font-size: 0.92rem;
+    padding: 0.5rem 1rem !important;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-link:hover {
+    background: var(--glass-bg);
+    color: #667eea !important;
+    transform: translateY(-1px);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+    transition: var(--transition);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 60%;
+}
+
+/* === Contenedor Principal === */
+.main-container {
+    padding: 2rem 0;
+    min-height: calc(100vh - 160px);
+}
+
+/* === Títulos de Página === */
+.page-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+/* === Tarjetas Glass === */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* === Tarjeta de Contacto (index) === */
+.contact-card {
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.contact-card .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transition: var(--transition);
+}
+
+.contact-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.contact-card .card-img-wrapper {
+    overflow: hidden;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    position: relative;
+}
+
+.contact-card .card-img-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(transparent, rgba(15, 15, 26, 0.8));
+}
+
+.contact-card .card-body {
+    padding: 1.25rem;
+}
+
+.contact-card .contact-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.contact-card .contact-phone {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.contact-card .contact-email {
+    font-size: 0.8rem;
+    color: #667eea;
+}
+
+/* === Acciones de Tarjeta === */
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1.25rem 1.25rem;
+}
+
+.card-actions .btn {
+    flex: 1;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.45rem 0.6rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    border: none;
+}
+
+/* === Botones Personalizados === */
+.btn-glow-primary {
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    padding: 0.65rem 1.5rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-glow-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-glow-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    color: #fff;
+}
+
+.btn-glow-primary:hover::before {
+    left: 100%;
+}
+
+.btn-glow-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-glow-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(56, 239, 125, 0.3);
+    color: #fff;
+}
+
+.btn-glow-danger {
+    background: linear-gradient(135deg, #f5576c 0%, #ff6b6b 100%);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-glow-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+    color: #fff;
+}
+
+.btn-glow-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-glow-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+    color: #fff;
+}
+
+.btn-glow-info {
+    background: var(--accent-gradient);
+    color: #0f0f1a;
+    border: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-glow-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+    color: #0f0f1a;
+}
+
+.btn-outline-glass {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 0.55rem 1.2rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.btn-outline-glass:hover {
+    background: var(--glass-bg);
+    color: #667eea;
+    border-color: rgba(102, 126, 234, 0.4);
+}
+
+/* === Formularios Glass === */
+.glass-form {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+}
+
+.glass-form .form-label {
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.glass-form .form-control,
+.glass-form .form-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.glass-form .form-control:focus,
+.glass-form .form-select:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    color: var(--text-primary);
+}
+
+.glass-form .form-control::placeholder {
+    color: rgba(160, 160, 184, 0.5);
+}
+
+.glass-form textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.glass-form .form-text {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+/* === Tabla Glass (alternativa al grid para index) === */
+.glass-table {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.glass-table table {
+    margin-bottom: 0;
+}
+
+.glass-table thead th {
+    background: rgba(102, 126, 234, 0.15);
+    border-bottom: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+}
+
+.glass-table tbody td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+    color: var(--text-primary);
+    font-size: 0.92rem;
+}
+
+.glass-table tbody tr {
+    transition: var(--transition);
+}
+
+.glass-table tbody tr:hover {
+    background: rgba(102, 126, 234, 0.08);
+}
+
+.glass-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* === Detalle de Contacto (ver.php) === */
+.detail-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+.detail-photo {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--glass-border);
+    transition: var(--transition);
+}
+
+.detail-photo:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    box-shadow: var(--shadow-glow);
+}
+
+.detail-info {
+    padding: 2rem;
+}
+
+.detail-info .info-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+}
+
+.detail-info .info-value {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.detail-info .info-value:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.detail-name {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+}
+
+/* === Alertas Personalizadas === */
+.alert-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.alert-glass-success {
+    border-left: 4px solid #38ef7d;
+    background: rgba(56, 239, 125, 0.08);
+}
+
+.alert-glass-danger {
+    border-left: 4px solid #f5576c;
+    background: rgba(245, 87, 108, 0.08);
+}
+
+.alert-glass-warning {
+    border-left: 4px solid #f093fb;
+    background: rgba(240, 147, 251, 0.08);
+}
+
+/* === Confirmación de Eliminación === */
+.delete-confirm-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(245, 87, 108, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(245, 87, 108, 0.15);
+}
+
+.delete-confirm-card .delete-icon {
+    font-size: 4rem;
+    background: var(--secondary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.delete-confirm-card h3 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.delete-confirm-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* === Avatar / Foto en Tabla === */
+.contact-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--glass-border);
+    transition: var(--transition);
+}
+
+.contact-avatar:hover {
+    border-color: #667eea;
+    transform: scale(1.1);
+}
+
+/* === Estado Vacío === */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-state .empty-icon {
+    font-size: 5rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.empty-state h4 {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* === Footer === */
+.footer-custom {
+    background: rgba(15, 15, 26, 0.9);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+}
+
+/* === Badge Personalizado === */
+.badge-glass {
+    background: rgba(102, 126, 234, 0.15);
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid rgba(102, 126, 234, 0.25);
+}
+
+/* === Stats Bar (index) === */
+.stats-bar {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-item {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    flex: 1;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stat-item:hover {
+    border-color: rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* === Previsualización de Imagen === */
+.img-preview-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 2px dashed var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.img-preview-container:hover {
+    border-color: #667eea;
+}
+
+.img-preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.img-preview-placeholder {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.img-preview-placeholder i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+/* === Buscador === */
+.search-box {
+    position: relative;
+}
+
+.search-box .form-control {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    color: var(--text-primary);
+    padding: 0.65rem 1rem 0.65rem 2.8rem;
+    font-size: 0.92rem;
+    transition: var(--transition);
+}
+
+.search-box .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.search-box .form-control::placeholder {
+    color: var(--text-secondary);
+}
+
+.search-box .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* === Animaciones === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.fade-in-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.fade-in-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
+.fade-in-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
+.fade-in-up-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .stats-bar {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .glass-form {
+        padding: 1.5rem;
+    }
+
+    .detail-name {
+        font-size: 1.5rem;
+    }
+
+    .delete-confirm-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-actions {
+        flex-direction: column;
+    }
+
+    .main-container {
+        padding: 1rem 0;
+    }
+}
+
+/* === Scrollbar personalizado === */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.5);
+}
+
+/* === Foto actual en edición === */
+.current-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--glass-border);
+}
+
+/* === File Input Personalizado === */
+.form-control[type="file"] {
+    padding: 0.5rem;
+}
+
+.form-control[type="file"]::file-selector-button {
+    background: var(--primary-gradient);
+    color: #fff;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.form-control[type="file"]::file-selector-button:hover {
+    opacity: 0.85;
+}
